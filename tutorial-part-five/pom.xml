@@ -27,7 +27,7 @@
         <slf4j.version>1.6.1</slf4j.version>
         <spring.version>3.1.0.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <querydsl.version>2.3.2</querydsl.version>
+        <querydsl.version>2.9.0</querydsl.version>
     </properties>
     <dependencies>
         <!-- Apache Commons -->
@@ -254,25 +254,30 @@
                 </configuration>
             </plugin>
             <!-- Maven APT Plugin -->
-            <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>maven-apt-plugin</artifactId>
-                <version>1.0.2</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Specifies the directory in which the query types are generated -->
-                            <outputDirectory>target/generated-sources</outputDirectory>
-                            <!-- States that the APT code generator should look for JPA annotations -->
-                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+		<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.0.8</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.mysema.querydsl</groupId>
+						<artifactId>querydsl-apt</artifactId>
+						<version>${querydsl.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/generated-sources</outputDirectory>
+							<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
     </build>
 </project>

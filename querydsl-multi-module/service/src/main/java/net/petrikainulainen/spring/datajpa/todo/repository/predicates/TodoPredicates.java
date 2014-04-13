@@ -1,7 +1,9 @@
 package net.petrikainulainen.spring.datajpa.todo.repository.predicates;
 
 import com.mysema.query.types.Predicate;
+
 import net.petrikainulainen.spring.datajpa.todo.model.QTodo;
+
 
 /**
  * @author Petri Kainulainen
